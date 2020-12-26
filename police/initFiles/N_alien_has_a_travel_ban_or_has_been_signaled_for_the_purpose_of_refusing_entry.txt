@@ -1,0 +1,1 @@
+{"ID":"N_alien_has_a_travel_ban_or_has_been_signaled_for_the_purpose_of_refusing_entry","signature":"file string","modes":"+-"}

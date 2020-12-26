@@ -1,0 +1,17 @@
+{
+	"firstName": "Daniel",
+	"lastName": "Illner",
+	"age": 25,
+	"passportId":12345,
+	"applicationId":187187,
+	"bankId":"3507e53",
+	"employerName":"MI5",
+	"universityName":"AAU",
+	"medicineAffiliation":"Dr. Gertz Wohlhabend",
+	"streetAddress": "187 Strasse",
+	"city": "Munich",
+ 	"state": "BY",
+	"postalCode": "12345"
+	"timeStamp":1594499251 
+}
+

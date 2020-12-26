@@ -1,0 +1,60 @@
+{
+    "name": "evidentia-network-org${ORG}",
+    "version": "1.0.0",
+    "client": {
+        "organization": "${ORG}",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "${ORG}": {
+            "mspid": "${ORG}MSP",
+            "peers": [
+                "peer0.${org}.evidentia.net",
+                "peer1.${org}.evidentia.net"
+            ],
+            "certificateAuthorities": [
+                "ca.${org}.evidentia.net"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.${org}.evidentia.net": {
+            "url": "grpcs://localhost:${P0PORT}",
+            "tlsCACerts": {
+                "pem": "${PEERPEM}"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.${org}.evidentia.net",
+                "hostnameOverride": "peer0.${org}.evidentia.net"
+            }
+        },
+        "peer1.${org}.evidentia.net": {
+            "url": "grpcs://localhost:${P1PORT}",
+            "tlsCACerts": {
+                "pem": "${PEERPEM}"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.${org}.evidentia.net",
+                "hostnameOverride": "peer1.${org}.evidentia.net"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.${org}.evidentia.net": {
+            "url": "https://localhost:${CAPORT}",
+            "caName": "ca-${org}",
+            "tlsCACerts": {
+                "pem": "${CAPEM}"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

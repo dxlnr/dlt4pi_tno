@@ -1,0 +1,1 @@
+{"ID":"seasonal_employment","signature":"file string","modes":"+-"}

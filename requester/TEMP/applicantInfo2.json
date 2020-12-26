@@ -1,0 +1,17 @@
+{
+	"firstName": "Max",
+	"lastName": "Muselmann",
+	"age": 73,
+	"passportId":54321,
+	"applicationId":928374,
+	"bankId":"238phf34",
+	"employerName":"",
+	"universityName":"AAU",
+	"medicineAffiliation":"Dr. Gertz Wohlhabend",
+	"streetAddress": "1337 Strasse",
+	"city": "Singen",
+ 	"state": "Baden-Baden",
+	"postalCode": "34527",
+	"timeStamp":1594499251
+}
+

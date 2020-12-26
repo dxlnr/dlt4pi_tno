@@ -1,0 +1,422 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer.evidentia.net:
+    container_name: orderer.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    volumes:
+        - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../crypto-config/ordererOrganizations/evidentia.net/orderers/orderer.evidentia.net/msp:/var/hyperledger/orderer/msp
+        - ../crypto-config/ordererOrganizations/evidentia.net/orderers/orderer.evidentia.net/tls/:/var/hyperledger/orderer/tls
+        - orderer.evidentia.net:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+
+  peer0.requester.evidentia.net:
+    container_name: peer0.requester.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.requester.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.requester.evidentia.net:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.requester.evidentia.net:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.requester.evidentia.net:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.requester.evidentia.net:7051
+      - CORE_PEER_LOCALMSPID=RequesterMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/requester.evidentia.net/peers/peer0.requester.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/requester.evidentia.net/peers/peer0.requester.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.requester.evidentia.net:/var/hyperledger/production
+    ports:
+      - 7051:7051
+
+  peer1.requester.evidentia.net:
+    container_name: peer1.requester.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.requester.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.requester.evidentia.net:8051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.requester.evidentia.net:8052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.requester.evidentia.net:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.requester.evidentia.net:7051
+      - CORE_PEER_LOCALMSPID=RequesterMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/requester.evidentia.net/peers/peer1.requester.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/requester.evidentia.net/peers/peer1.requester.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.requester.evidentia.net:/var/hyperledger/production
+
+    ports:
+      - 8051:8051
+
+
+  peer0.ind.evidentia.net:
+    container_name: peer0.ind.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.ind.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.ind.evidentia.net:9051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.ind.evidentia.net:9052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.ind.evidentia.net:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.ind.evidentia.net:10051
+      - CORE_PEER_LOCALMSPID=ImmigrationDepartmentMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/ind.evidentia.net/peers/peer0.ind.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/ind.evidentia.net/peers/peer0.ind.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.ind.evidentia.net:/var/hyperledger/production
+    ports:
+      - 9051:9051
+
+  peer1.ind.evidentia.net:
+    container_name: peer1.ind.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.ind.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.ind.evidentia.net:10051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.ind.evidentia.net:10052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.ind.evidentia.net:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.ind.evidentia.net:9051
+      - CORE_PEER_LOCALMSPID=ImmigrationDepartmentMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/ind.evidentia.net/peers/peer1.ind.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/ind.evidentia.net/peers/peer1.ind.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.ind.evidentia.net:/var/hyperledger/production
+    ports:
+      - 10051:10051
+
+  peer0.coord.evidentia.net:
+    container_name: peer0.coord.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.coord.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.coord.evidentia.net:11051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.coord.evidentia.net:11052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.coord.evidentia.net:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.coord.evidentia.net:12051
+      - CORE_PEER_LOCALMSPID=CoordinatorMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/coord.evidentia.net/peers/peer0.coord.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/coord.evidentia.net/peers/peer0.coord.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.coord.evidentia.net:/var/hyperledger/production
+    ports:
+      - 11051:11051
+
+  peer1.coord.evidentia.net:
+    container_name: peer1.coord.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.coord.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.coord.evidentia.net:12051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:12051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.coord.evidentia.net:12052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:12052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.coord.evidentia.net:12051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.coord.evidentia.net:11051
+      - CORE_PEER_LOCALMSPID=CoordinatorMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/coord.evidentia.net/peers/peer1.coord.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/coord.evidentia.net/peers/peer1.coord.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.coord.evidentia.net:/var/hyperledger/production
+    ports:
+      - 12051:12051
+
+  peer0.uni.evidentia.net:
+    container_name: peer0.uni.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.uni.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.uni.evidentia.net:13051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:13051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.uni.evidentia.net:13052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:13052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.uni.evidentia.net:13051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.uni.evidentia.net:14051
+      - CORE_PEER_LOCALMSPID=UniversityMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/uni.evidentia.net/peers/peer0.uni.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/uni.evidentia.net/peers/peer0.uni.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.uni.evidentia.net:/var/hyperledger/production
+    ports:
+      - 13051:13051
+
+  peer1.uni.evidentia.net:
+    container_name: peer1.uni.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.uni.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.uni.evidentia.net:14051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:14051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.uni.evidentia.net:14052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:14052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.uni.evidentia.net:14051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.uni.evidentia.net:13051
+      - CORE_PEER_LOCALMSPID=UniversityMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/uni.evidentia.net/peers/peer1.uni.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/uni.evidentia.net/peers/peer1.uni.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.uni.evidentia.net:/var/hyperledger/production
+    ports:
+      - 14051:14051
+
+
+  peer0.bank.evidentia.net:
+    container_name: peer0.bank.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bank.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.bank.evidentia.net:15051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:15051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.bank.evidentia.net:15052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:15052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bank.evidentia.net:15051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.bank.evidentia.net:16051
+      - CORE_PEER_LOCALMSPID=BankMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bank.evidentia.net/peers/peer0.bank.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bank.evidentia.net/peers/peer0.bank.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.bank.evidentia.net:/var/hyperledger/production
+    ports:
+      - 15051:15051
+
+  peer1.bank.evidentia.net:
+    container_name: peer1.bank.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.bank.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.bank.evidentia.net:16051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:16051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.bank.evidentia.net:16052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:16052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.bank.evidentia.net:16051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bank.evidentia.net:15051
+      - CORE_PEER_LOCALMSPID=BankMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bank.evidentia.net/peers/peer1.bank.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bank.evidentia.net/peers/peer1.bank.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.bank.evidentia.net:/var/hyperledger/production
+    ports:
+      - 16051:16051
+
+  peer0.employer.evidentia.net:
+    container_name: peer0.employer.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.employer.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.employer.evidentia.net:17051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:17051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.employer.evidentia.net:17052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:17052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.employer.evidentia.net:17051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.employer.evidentia.net:18051
+      - CORE_PEER_LOCALMSPID=EmployerMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/employer.evidentia.net/peers/peer0.employer.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/employer.evidentia.net/peers/peer0.employer.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.employer.evidentia.net:/var/hyperledger/production
+    ports:
+      - 17051:17051
+
+  peer1.employer.evidentia.net:
+    container_name: peer1.employer.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.employer.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.employer.evidentia.net:18051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:18051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.employer.evidentia.net:18052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:18052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.employer.evidentia.net:18051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.employer.evidentia.net:17051
+      - CORE_PEER_LOCALMSPID=EmployerMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/employer.evidentia.net/peers/peer1.employer.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/employer.evidentia.net/peers/peer1.employer.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.employer.evidentia.net:/var/hyperledger/production
+    ports:
+      - 18051:18051
+
+  peer0.bc.evidentia.net:
+    container_name: peer0.bc.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bc.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.bc.evidentia.net:19051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:19051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.bc.evidentia.net:19052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:19052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bc.evidentia.net:19051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.bc.evidentia.net:20051
+      - CORE_PEER_LOCALMSPID=BorderControlMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bc.evidentia.net/peers/peer0.bc.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bc.evidentia.net/peers/peer0.bc.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.bc.evidentia.net:/var/hyperledger/production
+    ports:
+      - 19051:19051
+
+  peer1.bc.evidentia.net:
+    container_name: peer1.bc.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.bc.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.bc.evidentia.net:20051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:20051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.bc.evidentia.net:20052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:20052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.bc.evidentia.net:20051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.bc.evidentia.net:19051
+      - CORE_PEER_LOCALMSPID=BorderControlMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bc.evidentia.net/peers/peer1.bc.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bc.evidentia.net/peers/peer1.bc.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.bc.evidentia.net:/var/hyperledger/production
+    ports:
+      - 20051:20051
+
+
+  peer0.police.evidentia.net:
+    container_name: peer0.police.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.police.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.police.evidentia.net:21051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:21051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.police.evidentia.net:21052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:21052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.police.evidentia.net:21051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.police.evidentia.net:22051
+      - CORE_PEER_LOCALMSPID=PoliceMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/police.evidentia.net/peers/peer0.police.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/police.evidentia.net/peers/peer0.police.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.police.evidentia.net:/var/hyperledger/production
+    ports:
+      - 21051:21051
+
+  peer1.police.evidentia.net:
+    container_name: peer1.police.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.police.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.police.evidentia.net:22051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:22051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.police.evidentia.net:22052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:22052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.police.evidentia.net:22051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.police.evidentia.net:21051
+      - CORE_PEER_LOCALMSPID=PoliceMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/police.evidentia.net/peers/peer1.police.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/police.evidentia.net/peers/peer1.police.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.police.evidentia.net:/var/hyperledger/production
+    ports:
+      - 22051:22051
+
+
+  peer0.medicine.evidentia.net:
+    container_name: peer0.medicine.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.medicine.evidentia.net
+      - CORE_PEER_ADDRESS=peer0.medicine.evidentia.net:23051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:23051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.medicine.evidentia.net:23052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:23052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.medicine.evidentia.net:23051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.medicine.evidentia.net:24051
+      - CORE_PEER_LOCALMSPID=MedicalAssociationMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/medicine.evidentia.net/peers/peer0.medicine.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/medicine.evidentia.net/peers/peer0.medicine.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer0.medicine.evidentia.net:/var/hyperledger/production
+    ports:
+      - 23051:23051
+
+  peer1.medicine.evidentia.net:
+    container_name: peer1.medicine.evidentia.net
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.medicine.evidentia.net
+      - CORE_PEER_ADDRESS=peer1.medicine.evidentia.net:24051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:24051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.medicine.evidentia.net:24052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:24052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.medicine.evidentia.net:24051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.medicine.evidentia.net:23051
+      - CORE_PEER_LOCALMSPID=MedicalAssociationMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/medicine.evidentia.net/peers/peer1.medicine.evidentia.net/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/medicine.evidentia.net/peers/peer1.medicine.evidentia.net/tls:/etc/hyperledger/fabric/tls
+        - peer1.medicine.evidentia.net:/var/hyperledger/production
+    ports:
+      - 24051:24051

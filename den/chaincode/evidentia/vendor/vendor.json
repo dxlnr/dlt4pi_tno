@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "n+ZKx3gMoBi4t0fN84vzz0r2uCM=",
+			"path": "github.com/hyperledger/fabric/common/attrmgr",
+			"revision": "0ac4069228aff1558e4dcbe5606b593a332048e0",
+			"revisionTime": "2019-09-26T05:02:13Z"
+		}
+	],
+	"rootPath": "evidentia"
+}

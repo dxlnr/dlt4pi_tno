@@ -1,0 +1,1 @@
+{"ID": "Wk_test", "script": "Wk_test.txt","queries": [{"ID":"Wk_test", "signature": ["file","string"], "mode": "+-"}]}

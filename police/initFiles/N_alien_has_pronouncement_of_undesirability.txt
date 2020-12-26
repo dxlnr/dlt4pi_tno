@@ -1,0 +1,5 @@
+{
+	"ID": "N_alien_has_pronouncement_of_undesirability",
+	"signature": "file string",
+	"modes":"+-"
+}

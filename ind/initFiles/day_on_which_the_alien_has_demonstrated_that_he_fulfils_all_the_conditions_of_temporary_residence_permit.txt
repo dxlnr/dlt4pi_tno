@@ -1,0 +1,1 @@
+{"ID":"day_on_which_the_alien_has_demonstrated_that_he_fulfils_all_the_conditions_of_temporary_residence_permit","signature":"file string","modes":"+-"}

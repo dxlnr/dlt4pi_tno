@@ -1,0 +1,1 @@
+{"ID":"work_as_a_highly_skilled_migrant","signature":"file string","modes":"+-"}

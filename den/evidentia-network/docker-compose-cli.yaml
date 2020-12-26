@@ -1,0 +1,237 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.evidentia.net:
+  peer0.requester.evidentia.net:
+  peer1.requester.evidentia.net:
+  peer0.ind.evidentia.net:
+  peer1.ind.evidentia.net:
+  peer0.coord.evidentia.net:
+  peer1.coord.evidentia.net:
+  peer0.uni.evidentia.net:
+  peer1.uni.evidentia.net:
+  peer0.bank.evidentia.net:
+  peer1.bank.evidentia.net:
+  peer0.employer.evidentia.net:
+  peer1.employer.evidentia.net:
+  peer0.bc.evidentia.net:
+  peer1.bc.evidentia.net:
+  peer0.police.evidentia.net:
+  peer1.police.evidentia.net:
+  peer0.medicine.evidentia.net:
+  peer1.medicine.evidentia.net:
+
+networks:
+  byfn:
+
+services:
+
+  orderer.evidentia.net:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.evidentia.net
+    container_name: orderer.evidentia.net
+    networks:
+      - byfn
+
+  peer0.requester.evidentia.net:
+    container_name: peer0.requester.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.requester.evidentia.net
+    networks:
+      - byfn
+
+  peer1.requester.evidentia.net:
+    container_name: peer1.requester.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.requester.evidentia.net
+    networks:
+      - byfn
+
+  peer0.ind.evidentia.net:
+    container_name: peer0.ind.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.ind.evidentia.net
+    networks:
+      - byfn
+
+  peer1.ind.evidentia.net:
+    container_name: peer1.ind.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.ind.evidentia.net
+    networks:
+      - byfn
+
+  peer0.coord.evidentia.net:
+    container_name: peer0.coord.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.coord.evidentia.net
+    networks:
+      - byfn
+
+  peer1.coord.evidentia.net:
+    container_name: peer1.coord.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.coord.evidentia.net
+    networks:
+      - byfn
+
+  peer0.uni.evidentia.net:
+    container_name: peer0.uni.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.uni.evidentia.net
+    networks:
+      - byfn
+
+  peer1.uni.evidentia.net:
+    container_name: peer1.uni.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.uni.evidentia.net
+    networks:
+      - byfn
+
+  peer0.bank.evidentia.net:
+    container_name: peer0.bank.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bank.evidentia.net
+    networks:
+      - byfn
+
+  peer1.bank.evidentia.net:
+    container_name: peer1.bank.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.bank.evidentia.net
+    networks:
+      - byfn
+
+  peer0.employer.evidentia.net:
+    container_name: peer0.employer.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.employer.evidentia.net
+    networks:
+      - byfn
+
+  peer1.employer.evidentia.net:
+    container_name: peer1.employer.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.employer.evidentia.net
+    networks:
+      - byfn
+
+  peer0.bc.evidentia.net:
+    container_name: peer0.bc.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bc.evidentia.net
+    networks:
+      - byfn
+
+  peer1.bc.evidentia.net:
+    container_name: peer1.bc.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.bc.evidentia.net
+    networks:
+      - byfn
+
+  peer0.police.evidentia.net:
+    container_name: peer0.police.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.police.evidentia.net
+    networks:
+      - byfn
+
+  peer1.police.evidentia.net:
+    container_name: peer1.police.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.police.evidentia.net
+    networks:
+      - byfn
+
+  peer0.medicine.evidentia.net:
+    container_name: peer0.medicine.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.medicine.evidentia.net
+    networks:
+      - byfn
+
+  peer1.medicine.evidentia.net:
+    container_name: peer1.medicine.evidentia.net
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.medicine.evidentia.net
+    networks:
+      - byfn
+
+
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - SYS_CHANNEL=$SYS_CHANNEL
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.requester.evidentia.net:7051
+      - CORE_PEER_LOCALMSPID=RequesterMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/requester.evidentia.net/peers/peer0.requester.evidentia.net/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/requester.evidentia.net/peers/peer0.requester.evidentia.net/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/requester.evidentia.net/peers/peer0.requester.evidentia.net/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/requester.evidentia.net/users/Admin@requester.evidentia.net/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/chaincode
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.evidentia.net
+      - peer0.requester.evidentia.net
+      - peer1.requester.evidentia.net
+      - peer0.ind.evidentia.net
+      - peer1.ind.evidentia.net
+      - peer0.coord.evidentia.net
+      - peer1.coord.evidentia.net
+      - peer0.uni.evidentia.net
+      - peer1.uni.evidentia.net
+      - peer0.bank.evidentia.net
+      - peer1.bank.evidentia.net
+      - peer0.employer.evidentia.net
+      - peer1.employer.evidentia.net
+      - peer0.bc.evidentia.net
+      - peer1.bc.evidentia.net
+      - peer0.police.evidentia.net
+      - peer1.police.evidentia.net
+      - peer0.medicine.evidentia.net
+      - peer1.medicine.evidentia.net
+
+    networks:
+      - byfn

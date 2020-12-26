@@ -1,0 +1,1 @@
+{"ID":"alien_has_a_facial_image_and_ten_fingerprints_taken","signature":"file string","modes":"+-"}

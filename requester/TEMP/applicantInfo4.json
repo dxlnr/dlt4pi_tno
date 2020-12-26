@@ -1,0 +1,17 @@
+{
+	"firstName": "Karl-Heinz",
+	"lastName": "Heinrich",
+	"age": 18,
+	"passportId":238710,
+	"applicationId":222222,
+	"bankId":"2398y42h3",
+	"employerName":"",
+	"universityName":"LLDH",
+	"medicineAffiliation":"Dr. Med. Jeremiah Rueckenkrumm",
+	"streetAddress": "72 Strasse",
+	"city": "Berlin",
+ 	"state": "Berlin",
+	"postalCode": "87565",
+	"timeStamp":1594499251 
+}
+

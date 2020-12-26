@@ -1,0 +1,60 @@
+{
+    "name": "evidentia-network-orgCoordinator",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Coordinator",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Coordinator": {
+            "mspid": "CoordinatorMSP",
+            "peers": [
+                "peer0.coord.evidentia.net",
+                "peer1.coord.evidentia.net"
+            ],
+            "certificateAuthorities": [
+                "ca.coord.evidentia.net"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.coord.evidentia.net": {
+            "url": "grpcs://localhost:11051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICZTCCAgqgAwIBAgIRAMfi1GIwkNrOke4OqMtM8NAwCgYIKoZIzj0EAwIwfDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHDAaBgNVBAoTE2Nvb3JkLmV2aWRlbnRpYS5uZXQxIjAgBgNVBAMT\nGXRsc2NhLmNvb3JkLmV2aWRlbnRpYS5uZXQwHhcNMjAwNzA4MTAzMzAwWhcNMzAw\nNzA2MTAzMzAwWjB8MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEcMBoGA1UEChMTY29vcmQuZXZpZGVudGlh\nLm5ldDEiMCAGA1UEAxMZdGxzY2EuY29vcmQuZXZpZGVudGlhLm5ldDBZMBMGByqG\nSM49AgEGCCqGSM49AwEHA0IABGv2UUuGOLWWRFPAnGzbGLVUPFo/clMXNMnrPfCR\nZLgfhilMHoqleBz5OdMN+D4wfaivP4nVzwkHzcBLusQBIN2jbTBrMA4GA1UdDwEB\n/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/\nBAUwAwEB/zApBgNVHQ4EIgQgD/gHJtYVlLIeE9UK1Cksk/3M874Y50J81OPtFBJF\n9p0wCgYIKoZIzj0EAwIDSQAwRgIhAOoA0L2xRn6qngwCokIm6MMEZR7cBOwPBiJS\n+OlYCeTYAiEA5je4oyEQu4fbnZVtvTN+DKurAfy/91K57V2M3IIcPF0=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.coord.evidentia.net",
+                "hostnameOverride": "peer0.coord.evidentia.net"
+            }
+        },
+        "peer1.coord.evidentia.net": {
+            "url": "grpcs://localhost:12051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICZTCCAgqgAwIBAgIRAMfi1GIwkNrOke4OqMtM8NAwCgYIKoZIzj0EAwIwfDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHDAaBgNVBAoTE2Nvb3JkLmV2aWRlbnRpYS5uZXQxIjAgBgNVBAMT\nGXRsc2NhLmNvb3JkLmV2aWRlbnRpYS5uZXQwHhcNMjAwNzA4MTAzMzAwWhcNMzAw\nNzA2MTAzMzAwWjB8MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEcMBoGA1UEChMTY29vcmQuZXZpZGVudGlh\nLm5ldDEiMCAGA1UEAxMZdGxzY2EuY29vcmQuZXZpZGVudGlhLm5ldDBZMBMGByqG\nSM49AgEGCCqGSM49AwEHA0IABGv2UUuGOLWWRFPAnGzbGLVUPFo/clMXNMnrPfCR\nZLgfhilMHoqleBz5OdMN+D4wfaivP4nVzwkHzcBLusQBIN2jbTBrMA4GA1UdDwEB\n/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/\nBAUwAwEB/zApBgNVHQ4EIgQgD/gHJtYVlLIeE9UK1Cksk/3M874Y50J81OPtFBJF\n9p0wCgYIKoZIzj0EAwIDSQAwRgIhAOoA0L2xRn6qngwCokIm6MMEZR7cBOwPBiJS\n+OlYCeTYAiEA5je4oyEQu4fbnZVtvTN+DKurAfy/91K57V2M3IIcPF0=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.coord.evidentia.net",
+                "hostnameOverride": "peer1.coord.evidentia.net"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.coord.evidentia.net": {
+            "url": "https://localhost:9054",
+            "caName": "ca-coord",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICXjCCAgSgAwIBAgIRAO+9Qs3dDlt6gRJGdBrmHs0wCgYIKoZIzj0EAwIweTEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHDAaBgNVBAoTE2Nvb3JkLmV2aWRlbnRpYS5uZXQxHzAdBgNVBAMT\nFmNhLmNvb3JkLmV2aWRlbnRpYS5uZXQwHhcNMjAwNzA4MTAzMzAwWhcNMzAwNzA2\nMTAzMzAwWjB5MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQG\nA1UEBxMNU2FuIEZyYW5jaXNjbzEcMBoGA1UEChMTY29vcmQuZXZpZGVudGlhLm5l\ndDEfMB0GA1UEAxMWY2EuY29vcmQuZXZpZGVudGlhLm5ldDBZMBMGByqGSM49AgEG\nCCqGSM49AwEHA0IABONvZ0Jigo5R3OWq9TH6THKKDWcBFuv6ha8URU+4frjNeUgj\nwQ1vKEbxmYLVccBt7K++H1NUm02lBY/TL+S8BBejbTBrMA4GA1UdDwEB/wQEAwIB\npjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB\n/zApBgNVHQ4EIgQgTk85+SYpTPvg9cfk7HJp1tQO+olsye4zFy6bdRpvQ/swCgYI\nKoZIzj0EAwIDSAAwRQIgb9P0D803xkvHoU4QWpyvbGLez9dhNcA7kbVH3YsurKIC\nIQDnD6r4fYZcTWQC8I23ShcKHd/Uc+KHMe/QFMFJLMT7nA==\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

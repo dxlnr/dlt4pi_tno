@@ -1,0 +1,1 @@
+{"ID":"foreign_national_is_prepared_to_cooperate_in_a_medical_examination","signature":"file string","modes":"+-"}

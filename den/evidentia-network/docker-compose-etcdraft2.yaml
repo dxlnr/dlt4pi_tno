@@ -1,0 +1,77 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer2.evidentia.net:
+  orderer3.evidentia.net:
+  orderer4.evidentia.net:
+  orderer5.evidentia.net:
+
+networks:
+  byfn:
+
+services:
+
+  orderer2.evidentia.net:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer2.evidentia.net
+    networks:
+    - byfn
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer2.evidentia.net/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer2.evidentia.net/tls/:/var/hyperledger/orderer/tls
+        - orderer2.evidentia.net:/var/hyperledger/production/orderer
+    ports:
+    - 8050:7050
+
+  orderer3.evidentia.net:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer3.evidentia.net
+    networks:
+    - byfn
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer3.evidentia.net/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer3.evidentia.net/tls/:/var/hyperledger/orderer/tls
+        - orderer3.evidentia.net:/var/hyperledger/production/orderer
+    ports:
+    - 9050:7050
+
+  orderer4.evidentia.net:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer4.evidentia.net
+    networks:
+    - byfn
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer4.evidentia.net/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer4.evidentia.net/tls/:/var/hyperledger/orderer/tls
+        - orderer4.evidentia.net:/var/hyperledger/production/orderer
+    ports:
+    - 10050:7050
+
+  orderer5.evidentia.net:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer5.evidentia.net
+    networks:
+    - byfn
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer5.evidentia.net/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/evidentia.net/orderers/orderer5.evidentia.net/tls/:/var/hyperledger/orderer/tls
+        - orderer5.evidentia.net:/var/hyperledger/production/orderer
+    ports:
+    - 11050:7050

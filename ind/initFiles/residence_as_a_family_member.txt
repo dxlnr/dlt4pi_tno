@@ -1,0 +1,1 @@
+{"ID":"residence_as_a_family_member","signature":"file string","modes":"+-"}

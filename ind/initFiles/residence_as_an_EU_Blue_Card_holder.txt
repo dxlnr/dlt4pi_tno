@@ -1,0 +1,1 @@
+{"ID":"residence_as_an_EU_Blue_Card_holder","signature":"file string","modes":"+-"}
