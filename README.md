@@ -1,5 +1,19 @@
 # DLT 4 Public Innovation TNO-Challenge
 
+The immigration process in the Netherlands faces more complexity and a variety of problems
+nowadays. In order to overcome these problems, innovative ideas and concepts are essential.
+Therefore, TNO in combination with fortiss and the Technical University Munich initiated a
+project aiming for new vision and solutions.
+In this report we want to introduce a concept to overcome those issues and that should function
+as a first stage concept to initiate a process that will force change in the public sector, more
+specifically in the immigration process. Our concept relies on the connection of three different
+ideas and technical implications. The use case and prototype provided is based on a small part
+of the Dutch Aliens Act which is represent by the domain-specific language system FLINT.
+The prototype is a distributed ledger technology system based on Evidentia and implements the
+decision process of providing a resident permit for students or highly skilled workers.
+
+For more information please check the DLT4PT20_Project_Report-cTNO.pdf [DLT4PT20_Project_Report-cTNO.pdf](DLT4PT20_Project_Report-cTNO.pdf)
+
 ##### In this README we want to provide a step-by-step instruction to set up our prototype.
 ##### We will first bring up the DEN, second bring up all ETB nodes and third create evidence.
 
@@ -105,7 +119,7 @@ mvn exec:java -Dexec.mainClass="evidentia.Administrator"
 cd ..
 ```
 
-#### 3.3 ETB: copy coordinator 
+#### 3.3 ETB: copy coordinator
 in each ETB entity (except coordinator):
 
 ##### Bank
@@ -222,7 +236,7 @@ evi -show-info #Optional
 evi
 ```
 
-#### 5.6 Run the DLT with terminal 
+#### 5.6 Run the DLT with terminal
 ##### Generate concrete and single evidence in the requester (Optional)
 ```bash
 cd requester/
@@ -242,15 +256,9 @@ cd requester
 evi "-add-claim \"trrp_small('TEMP/applicantInfo.json',O)\"
 ```
 
-#### 5.7 Run the DLT with GUI: 
+#### 5.7 Run the DLT with GUI:
 start the GUI at the requester:
 ```bash
 mvn exec:java -Dexec.mainClass="evidentia.GUI.Launcher"
 ```
-then follow the instructions from this [video](https://drive.google.com/file/d/1q_jo8sCQViBLeodR4XUAdtnimb6CZx-4/view?usp=sharing) or the GUI itself 
-
-
-
-
-
-
+then follow the instructions from this [video](https://drive.google.com/file/d/1q_jo8sCQViBLeodR4XUAdtnimb6CZx-4/view?usp=sharing) or the GUI itself
