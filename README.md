@@ -12,9 +12,9 @@ of the Dutch Aliens Act which is represent by the domain-specific language syste
 The prototype is a distributed ledger technology system based on Evidentia and implements the
 decision process of providing a resident permit for students or highly skilled workers.
 
-For more information please check the DLT4PT20_Project_Report-cTNO.pdf [DLT4PT20_Project_Report-cTNO.pdf](DLT4PT20_Project_Report-cTNO.pdf)
+For more information please check our [report](DLT4PT20_Project_Report-cTNO.pdf).
 
-##### In this README we want to provide a step-by-step instruction to set up our prototype.
+## Step-by-step instruction to set up our prototype.
 ##### We will first bring up the DEN, second bring up all ETB nodes and third create evidence.
 
 Extensiv README documentation on DEN can be found here: [DEN](https://git.fortiss.org/evidentia/den/-/tree/master)
